@@ -35,7 +35,7 @@ export const CONFIG = {
 
   // Browser Configuration
   BROWSER: {
-    HEADLESS: false,
+    HEADLESS: true,
     VIEWPORT: {
       MIN_WIDTH: 1280,
       MAX_WIDTH: 1920,
