@@ -17,20 +17,26 @@ export class BrowserService {
    * @returns {Promise<{browser: Browser, page: Page}>} Browser and page instances
    */
   static async initializeBrowser() {
-    const browser = await puppeteer.launch({ 
-      headless: CONFIG.BROWSER.HEADLESS 
-    });
-    
-    const page = await browser.newPage();
+  const browser = await puppeteer.launch({ 
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--single-process'
+    ]
+  });
+  
+  const page = await browser.newPage();
 
-    // Set random User-Agent
-    await page.setUserAgent(new randomUserAgent().toString());
+  // Set random User-Agent
+  await page.setUserAgent(new randomUserAgent().toString());
 
-    // Set random viewport
-    await page.setViewport(getRandomViewport());
+  // Set random viewport
+  await page.setViewport(getRandomViewport());
 
-    return { browser, page };
-  }
+  return { browser, page };
+}
 
   /**
    * Navigate to URL with error handling
